@@ -12,6 +12,6 @@ import com.example.demo.repository.StagiaireRepository;
 @RequestMapping("/rest/stagiaire")
 public class StagiaireRestController {
 
-	@Autowired
-	private StagiaireRepository stagiaireRepository;
+	//@Autowired
+	//private StagiaireRepository stagiaireRepository;
 }

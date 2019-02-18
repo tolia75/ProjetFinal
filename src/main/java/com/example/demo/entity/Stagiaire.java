@@ -5,6 +5,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,6 +16,7 @@ import org.springframework.data.annotation.Version;
 @SequenceGenerator(name="seqgenerator", sequenceName="seq_generator",allocationSize=1,initialValue=1)
 public class Stagiaire {
 
+	@Id
 	@GeneratedValue(generator="seqgenerator",strategy=GenerationType.SEQUENCE)
 	@Column(name="id")
 	private Integer id;
@@ -25,8 +27,8 @@ public class Stagiaire {
 	@Column(name="coordonnees")
 	private String coordonnees;
 	@Embedded
-	private Adresse adresse;
-	private Ordinateur ordinateur;
+	//private Adresse adresse;
+	//private Ordinateur ordinateur;
 	@Version
 	private Integer version;
 	
@@ -43,6 +45,7 @@ public class Stagiaire {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	/*
 	public String getCoordonnées() {
 		return coordonnées;
 	}
@@ -54,7 +57,7 @@ public class Stagiaire {
 	}
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
-	}
+	}*/
 	
 	
 	public Integer getId() {
@@ -63,25 +66,28 @@ public class Stagiaire {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	/*
 	public Ordinateur getOrdinateur() {
 		return ordinateur;
 	}
 	public void setOrdinateur(Ordinateur ordinateur) {
 		this.ordinateur = ordinateur;
 	}
+	*/
 	public Integer getVersion() {
 		return version;
 	}
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	/*
 	public Stagiaire(String nom, String prenom, String coordonnées, Adresse adresse) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.coordonnées = coordonnées;
 		this.adresse = adresse;
-	}
+	}*/
 	public Stagiaire() {
 		super();
 	}
