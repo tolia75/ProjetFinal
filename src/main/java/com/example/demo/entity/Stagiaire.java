@@ -1,14 +1,36 @@
 package com.example.demo.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+import org.springframework.data.annotation.Version;
+
+@Entity
+@Table(name="stagiaire")
+@SequenceGenerator(name="seqgenerator", sequenceName="seq_generator",allocationSize=1,initialValue=1)
 public class Stagiaire {
 
+	@GeneratedValue(generator="seqgenerator",strategy=GenerationType.SEQUENCE)
+	@Column(name="id")
 	private Integer id;
+	@Column(name="nom")
 	private String nom;
+	@Column(name="prenom")
 	private String prenom;
-	private String coordonnées;
+	@Column(name="coordonnees")
+	private String coordonnees;
+	@Embedded
 	private Adresse adresse;
+	private Ordinateur ordinateur;
+	@Version
 	private Integer version;
+	
+	
 	public String getNom() {
 		return nom;
 	}
@@ -32,6 +54,26 @@ public class Stagiaire {
 	}
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Ordinateur getOrdinateur() {
+		return ordinateur;
+	}
+	public void setOrdinateur(Ordinateur ordinateur) {
+		this.ordinateur = ordinateur;
+	}
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	public Stagiaire(String nom, String prenom, String coordonnées, Adresse adresse) {
 		super();
