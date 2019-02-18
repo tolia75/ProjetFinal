@@ -5,31 +5,62 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name="stagiaire")
 @SequenceGenerator(name="seqgenerator", sequenceName="seq_generator",allocationSize=1,initialValue=1)
 public class Stagiaire {
 
+	@Id
 	@GeneratedValue(generator="seqgenerator",strategy=GenerationType.SEQUENCE)
 	@Column(name="id")
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
 	private Integer id;
 	@Column(name="nom")
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
 	private String nom;
 	@Column(name="prenom")
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
 	private String prenom;
 	@Column(name="coordonnees")
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
 	private String coordonnees;
 	@Embedded
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
 	private Adresse adresse;
+	@Column(name="promotion")
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	private Promotion promotion;
+	@JoinColumn(name="ordinateur")
+	@OneToOne
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
 	private Ordinateur ordinateur;
-	@Version
+	@javax.persistence.Version
 	private Integer version;
-	
+
+
+	public String getCoordonnees() {
+		return coordonnees;
+	}
+	public void setCoordonnees(String coordonnees) {
+		this.coordonnees = coordonnees;
+	}
+	public Promotion getPromotion() {
+		return promotion;
+	}
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
+	}	
 	
 	public String getNom() {
 		return nom;
@@ -90,6 +121,7 @@ public class Stagiaire {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 	@Override
@@ -105,6 +137,11 @@ public class Stagiaire {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
 			return false;
 		return true;
 	}

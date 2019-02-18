@@ -3,121 +3,90 @@ package com.example.demo.entity;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Version;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-@Table(name="formateur")
-@SequenceGenerator(name="seqFormateur", sequenceName="seq_formateur",allocationSize=1,initialValue=1)
-public class Formateur {
-
+@Table(name="salle")
+@SequenceGenerator(name="seqSalle", sequenceName="seq_salle",allocationSize=1,initialValue=1)
+public class Salle {
 	@Id
-	@GeneratedValue(generator="seqFormateurr",strategy=GenerationType.SEQUENCE)
-	@Column(name="id")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@GeneratedValue(generator="seqSalle", strategy=GenerationType.SEQUENCE)
 	private Integer id;
-	@Column(name="prenom")
 	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
-	private String prenom;
+	@Column(name="code")
+	private String code;
 	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
-	@Column(name="nom")
-	private String nom;
+	@Column(name="disponibilite")
+	private boolean disponibilite;
 	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
-	@Column(name="coordonnees")
-	private String coordonnees;
+	@Column(name="capacite")
+	private Integer capacite;
 	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
-	@Embedded
-	private Adresse	adresse;
-	@ManyToMany
-	private	List<Matiere> matieres;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
-	@ManyToOne
-	@JoinColumn(name="formateur")
+	@OneToMany
+	@JoinColumn(name="salle")
 	private List<Module> modules;
-	@javax.persistence.Version
+	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@OneToOne
+	@JoinColumn(name="salle")
+	private VideoProjecteur videoProjecteur;
+	@Version
 	private Integer version;
-	
-	public Formateur() {
-		super();
-	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getPrenom() {
-		return prenom;
+	public String getCode() {
+		return code;
 	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setCode(String code) {
+		this.code = code;
 	}
-
-	public String getNom() {
-		return nom;
+	public boolean isDisponibilite() {
+		return disponibilite;
 	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setDisponibilite(boolean disponibilite) {
+		this.disponibilite = disponibilite;
 	}
-
-	public String getCoordonnees() {
-		return coordonnees;
+	public Integer getCapacite() {
+		return capacite;
 	}
-
-	public void setCoordonnees(String coordonnees) {
-		this.coordonnees = coordonnees;
+	public void setCapacite(Integer capacite) {
+		this.capacite = capacite;
 	}
-
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
-
-	public List<Matiere> getMatieres() {
-		return matieres;
-	}
-
-	public void setMatieres(List<Matiere> matieres) {
-		this.matieres = matieres;
-	}
-
 	public List<Module> getModules() {
 		return modules;
 	}
-
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
-
+	public VideoProjecteur getVideoProjecteur() {
+		return videoProjecteur;
+	}
+	public void setVideoProjecteur(VideoProjecteur videoProjecteur) {
+		this.videoProjecteur = videoProjecteur;
+	}
 	public Integer getVersion() {
 		return version;
 	}
-
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-
+	public Salle() {
+		super();
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,7 +95,6 @@ public class Formateur {
 		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -135,7 +103,7 @@ public class Formateur {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Formateur other = (Formateur) obj;
+		Salle other = (Salle) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -148,11 +116,7 @@ public class Formateur {
 			return false;
 		return true;
 	}
-
 	
 	
-
-
-
 
 }
