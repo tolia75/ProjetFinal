@@ -18,21 +18,17 @@ public class ConsoleApplicationService implements CommandLineRunner {
 	
 	@Autowired
 	private UserRepository userRepo;
-	/*
+	
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+		/*// TODO Auto-generated method stub
 		List<User> users = userRepo.findAll();
 		for(User u : users) {
 			u.setPassword(passwordEncode.encode(u.getPassword()));
 			userRepo.save(u);
-		}
-	}*/
-
-	@Override
-	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		
+		}*/
 	}
+
+	
 
 }

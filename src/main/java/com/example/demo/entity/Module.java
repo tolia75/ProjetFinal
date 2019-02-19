@@ -20,25 +20,29 @@ import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.demo.entity.jsonViews.JsonViews;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="modules")
 @SequenceGenerator(name="seqModule", sequenceName="seq_module", allocationSize=1, initialValue=1)
 public class Module {
-	
+	@JsonView(JsonViews.common.class)
 	@Id
 	@GeneratedValue(generator="seqModule", strategy= GenerationType.SEQUENCE)
 	@Column(name="id")
 	private Integer id;
-	
+	@JsonView(JsonViews.common.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_debut")
 	@DateTimeFormat(pattern="yyyy-MM--dd")
 	private Date debut;
+	@JsonView(JsonViews.common.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_fin")
 	@DateTimeFormat(pattern="yyyy-MM--dd")
 	private Date fin;
-	
+	@JsonView(JsonViews.commonBis.class)
 	@ManyToOne
 	@JoinColumn(name="formateur_id")
 	private Formateur formateur;

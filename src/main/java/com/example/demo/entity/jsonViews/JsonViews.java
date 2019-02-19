@@ -4,5 +4,9 @@ public class JsonViews {
 	public static class common{
 		
 	}
+	
+	public static class commonBis extends common{
+		
+	}
 
 }
