@@ -1,9 +1,7 @@
 package com.example.demo.restController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -23,39 +21,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.demo.entity.Salle;
 import com.example.demo.entity.Stagiaire;
 import com.example.demo.entity.jsonViews.JsonViews;
+import com.example.demo.repository.SalleRepository;
 import com.example.demo.repository.StagiaireRepository;
-import com.example.demo.service.StagiaireService;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/rest/stagiaire")
-public class StagiaireRestController {
+@RequestMapping("/rest/salle")
+public class SalleRestController 
 
-	@Autowired
-	private StagiaireRepository stagiaireRepository;
+	{@Autowired
+		private SalleRepository salleRepository;
 	
 	@JsonView(JsonViews.common.class)
-	@GetMapping("/list")
-	public ResponseEntity<List<Stagiaire>>findAll(){
-		return new ResponseEntity<List<Stagiaire>>(stagiaireRepository.findAll(), HttpStatus.OK);
+	@GetMapping(value= {"/",""})
+	public ResponseEntity<List<Salle>>findAll(){
+		return new ResponseEntity<List<Salle>>(salleRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
-	@GetMapping("/")
-	public List<Stagiaire>findAllWith(){
-		List<Stagiaire> stagiaires = new ArrayList();
-		return stagiaires = stagiaireRepository.findAll();
-	}
-	
-	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping("/{id}")
-	public ResponseEntity<Stagiaire> findById(@PathVariable(name = "id") Integer id) {
-		Optional<Stagiaire> opt = stagiaireRepository.findById(id);
+	public ResponseEntity<Salle> findById(@PathVariable(name = "id") Integer id) {
+		Optional<Salle> opt = salleRepository.findById(id);
 		if (opt.isPresent()) {
-			return new ResponseEntity<Stagiaire>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<Salle>(opt.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -63,13 +55,13 @@ public class StagiaireRestController {
 	}
 	
 	@PostMapping("/insert")
-	private ResponseEntity<Void> insertStagiaire(@Valid @RequestBody Stagiaire stagiaire, BindingResult br, UriComponentsBuilder uCB) {
+	private ResponseEntity<Void> insertSalle(@Valid @RequestBody Salle salle, BindingResult br, UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			stagiaireRepository.save(stagiaire);
+			salleRepository.save(salle);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/personne/{id}").buildAndExpand(stagiaire.getId()).toUri());
+			header.setLocation(uCB.path("/rest/personne/{id}").buildAndExpand(salle.getId()).toUri());
 			return new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 
@@ -77,19 +69,19 @@ public class StagiaireRestController {
 	
 	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable(name = "id") Integer id) {
-		stagiaireRepository.deleteById(id);
+		salleRepository.deleteById(id);
 	}
 	
 	@PutMapping("/stagiaire")
-	private Stagiaire update(@Valid @RequestBody Stagiaire stagiaire, BindingResult br) {
+	private Salle update(@Valid @RequestBody Salle salle, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;
 		} else {
-			Optional<Stagiaire> opt = stagiaireRepository.findById(stagiaire.getId());
+			Optional<Salle> opt = salleRepository.findById(salle.getId());
 			if (opt.isPresent()) {
-				Stagiaire personneEnBase = opt.get();
-				stagiaire.setVersion(personneEnBase.getVersion());
-				return stagiaireRepository.save(stagiaire);
+				Salle personneEnBase = opt.get();
+				salle.setVersion(personneEnBase.getVersion());
+				return salleRepository.save(salle);
 			} else {
 				return null;
 			}

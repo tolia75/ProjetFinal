@@ -11,20 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Version;
+import javax.persistence.Version;
 
 import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 
-
 @Entity
 @Table(name="stagiaire")
-@SequenceGenerator(name="seqgenerator", sequenceName="seq_generator",allocationSize=1,initialValue=1)
+@SequenceGenerator(name="seqStagiaire", sequenceName="seq_stagiaire",allocationSize=1,initialValue=1)
 public class Stagiaire {
 
 	@Id
-	@GeneratedValue(generator="seqgenerator",strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(generator="seqStagiaire", strategy=GenerationType.SEQUENCE)
 	@Column(name="id")
 	@JsonView(JsonViews.common.class)
 	private Integer id;
@@ -34,37 +32,29 @@ public class Stagiaire {
 	@Column(name="prenom")
 	@JsonView(JsonViews.common.class)
 	private String prenom;
-	@Column(name="coordonnees")
+	@Column(name="coordonnee")
 	@JsonView(JsonViews.common.class)
-	private String coordonnees;
+	private String coordonnee;
 	@Embedded
 	@JsonView(JsonViews.common.class)
 	private Adresse adresse;
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@ManyToOne
-	@JoinColumn(name="stagiaires")
-	@JsonView(JsonViews.common.class)
+	@JoinColumn(name="promotion")
 	private Promotion promotion;
-	@JoinColumn(name="ordinateur")
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToOne
-	@JsonView(JsonViews.common.class)
+	@JoinColumn(name="ordinateur")
 	private Ordinateur ordinateur;
-	@javax.persistence.Version
+	@Version
 	private Integer version;
-
-
-	public String getCoordonnees() {
-		return coordonnees;
-	}
-	public void setCoordonnees(String coordonnees) {
-		this.coordonnees = coordonnees;
-	}
-	public Promotion getPromotion() {
-		return promotion;
-	}
-	public void setPromotion(Promotion promotion) {
-		this.promotion = promotion;
-	}	
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -77,12 +67,11 @@ public class Stagiaire {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	
-	public String getCoordonnées() {
-		return coordonnees;
+	public String getCoordonnee() {
+		return coordonnee;
 	}
-	public void setCoordonnées(String coordonnées) {
-		this.coordonnees = coordonnées;
+	public void setCoordonnee(String coordonnee) {
+		this.coordonnee = coordonnee;
 	}
 	public Adresse getAdresse() {
 		return adresse;
@@ -90,35 +79,23 @@ public class Stagiaire {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-	
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+//	public Promotion getPromotion() {
+//		return promotion;
+//	}
+//	public void setPromotion(Promotion promotion) {
+//		this.promotion = promotion;
+//	}
 	public Ordinateur getOrdinateur() {
 		return ordinateur;
 	}
 	public void setOrdinateur(Ordinateur ordinateur) {
 		this.ordinateur = ordinateur;
 	}
-	
 	public Integer getVersion() {
 		return version;
 	}
 	public void setVersion(Integer version) {
 		this.version = version;
-	}
-	
-	public Stagiaire(String nom, String prenom, String coordonnées, Adresse adresse) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.coordonnees = coordonnées;
-		this.adresse = adresse;
 	}
 	public Stagiaire() {
 		super();
@@ -128,7 +105,6 @@ public class Stagiaire {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 	@Override
@@ -145,13 +121,13 @@ public class Stagiaire {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (version == null) {
-			if (other.version != null)
-				return false;
-		} else if (!version.equals(other.version))
-			return false;
 		return true;
 	}
+	
+	
+	
+	
+	
 	
 	
 }

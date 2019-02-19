@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,9 +26,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 @SequenceGenerator(name="seqPromotion",sequenceName="seq_promotion",allocationSize=1,initialValue=1)
 public class Promotion {
 	@Id
-	@Column(name = "nom", length = 50)
 	@JsonView(JsonViews.common.class)
 	@GeneratedValue(generator="seqPromotion",strategy=GenerationType.SEQUENCE)
+	private Integer id;
+	@Column(name = "nom", length = 50)
+	@JsonView(JsonViews.common.class)
 	private String nom;
 	@Column(name = "debut")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,13 +41,11 @@ public class Promotion {
 	@JsonView(JsonViews.common.class)
 	private Date fin;
 	@OneToMany(mappedBy = "promotion")
-	@JsonView(JsonViews.common.class)
-	private Set<Stagiaire> stagiaires;
+	private List<Stagiaire> stagiaires;
 	@OneToMany(mappedBy = "promotion")
-	@JsonView(JsonViews.common.class)
-	private Set<Module> modules;
+	private List<Module> modules;
 	@ManyToOne
-	@JoinColumn(name = "programme_titre")
+	@JoinColumn(name = "titre")
 	@JsonView(JsonViews.common.class)
 	private Programme programme;
 	@Version
@@ -79,16 +80,23 @@ public class Promotion {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public Set<Stagiaire> getStagiaires() {
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public List<Stagiaire> getStagiaires() {
 		return stagiaires;
 	}
-	public void setStagiaires(Set<Stagiaire> stagiaires) {
+	public void setStagiaires(List<Stagiaire> stagiaires) {
 		this.stagiaires = stagiaires;
 	}
-	public Set<Module> getModules() {
+	public List<Module> getModules() {
 		return modules;
 	}
-	public void setModules(Set<Module> modules) {
+	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
 	public Programme getProgramme() {

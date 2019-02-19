@@ -43,8 +43,9 @@ public class Formateur {
 	@Embedded
 	private Adresse	adresse;
 	@ManyToMany(mappedBy="formateurs")
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	private	List<Matiere> matieres;
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToMany(mappedBy="formateur")
 	private List<Module> modules;
 	@javax.persistence.Version

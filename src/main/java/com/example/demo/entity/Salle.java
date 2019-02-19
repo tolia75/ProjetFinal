@@ -33,11 +33,10 @@ public class Salle {
 	@JsonView(JsonViews.common.class)
 	@Column(name="capacite")
 	private Integer capacite;
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToMany
-	@JoinColumn(name="salle")
 	private List<Module> modules;
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToOne
 	@JoinColumn(name="salle")
 	private VideoProjecteur videoProjecteur;

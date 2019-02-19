@@ -22,7 +22,6 @@ public class Ordinateur {
 	@GeneratedValue(generator="seqOrdinateur",strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	@OneToOne(mappedBy="ordinateur")
-	@JsonView(JsonViews.common.class)
 	private Stagiaire stagiaire;
 	@Version
 	private Integer version;
