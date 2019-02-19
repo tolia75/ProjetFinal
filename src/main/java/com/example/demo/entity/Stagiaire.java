@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.Version;
 
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 
 
@@ -24,26 +25,26 @@ public class Stagiaire {
 	@Id
 	@GeneratedValue(generator="seqgenerator",strategy=GenerationType.SEQUENCE)
 	@Column(name="id")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private Integer id;
 	@Column(name="nom")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private String nom;
 	@Column(name="prenom")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private String prenom;
 	@Column(name="coordonnees")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private String coordonnees;
 	@Embedded
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private Adresse adresse;
 	@Column(name="promotion")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private Promotion promotion;
 	@JoinColumn(name="ordinateur")
 	@OneToOne
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private Ordinateur ordinateur;
 	@javax.persistence.Version
 	private Integer version;

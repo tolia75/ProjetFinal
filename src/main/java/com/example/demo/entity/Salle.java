@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -23,20 +24,20 @@ public class Salle {
 	@Id
 	@GeneratedValue(generator="seqSalle", strategy=GenerationType.SEQUENCE)
 	private Integer id;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@Column(name="code")
 	private String code;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@Column(name="disponibilite")
 	private boolean disponibilite;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@Column(name="capacite")
 	private Integer capacite;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@OneToMany
 	@JoinColumn(name="salle")
 	private List<Module> modules;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@OneToOne
 	@JoinColumn(name="salle")
 	private VideoProjecteur videoProjecteur;

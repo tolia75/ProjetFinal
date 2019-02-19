@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.Version;
 
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -27,23 +28,23 @@ public class Formateur {
 	@Id
 	@GeneratedValue(generator="seqFormateurr",strategy=GenerationType.SEQUENCE)
 	@Column(name="id")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private Integer id;
 	@Column(name="prenom")
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	private String prenom;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@Column(name="nom")
 	private String nom;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@Column(name="coordonnees")
 	private String coordonnees;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@Embedded
 	private Adresse	adresse;
 	@ManyToMany
 	private	List<Matiere> matieres;
-	@JsonView(com.example.demo.entity.jsonViews.JsonView.common.class)
+	@JsonView(JsonViews.common.class)
 	@ManyToOne
 	@JoinColumn(name="formateur")
 	private List<Module> modules;
