@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.entity.Promotion;
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.example.demo.repository.PromotionRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -30,13 +31,13 @@ public class PromotionRestController {
 	@Autowired
 	private PromotionRepository promotionRepository;
 	
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Promotion>> findAllPromotion() {
 		return new ResponseEntity<List<Promotion>>(promotionRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping("/{nom}")
 	public ResponseEntity<Promotion> findById(@PathVariable(name = "nom") String nom) {
 		Optional<Promotion> opt = promotionRepository.findById(nom);

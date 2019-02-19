@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.entity.Programme;
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.example.demo.repository.ProgrammeRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formationSpringBoot.entity.Personne;
-import formationSpringBoot.entity.jsonview.JsonViews;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -31,13 +30,13 @@ public class ProgrammeRestController {
 	@Autowired
 	private ProgrammeRepository programmeRepository;
 	
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Programme>> findAllProgramme() {
 		return new ResponseEntity<List<Programme>>(programmeRepository.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping("/{titre}")
 	public ResponseEntity<Programme> findById(@PathVariable(name = "titre") String titre) {
 		Optional<Programme> opt = programmeRepository.findById(titre);

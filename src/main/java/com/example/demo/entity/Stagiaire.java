@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -39,7 +40,8 @@ public class Stagiaire {
 	@Embedded
 	@JsonView(JsonViews.common.class)
 	private Adresse adresse;
-	@Column(name="promotion")
+	@ManyToOne
+	@JoinColumn(name="stagiaires")
 	@JsonView(JsonViews.common.class)
 	private Promotion promotion;
 	@JoinColumn(name="ordinateur")
@@ -77,17 +79,17 @@ public class Stagiaire {
 	}
 	
 	public String getCoordonnées() {
-		return coordonnées;
+		return coordonnees;
 	}
 	public void setCoordonnées(String coordonnées) {
-		this.coordonnées = coordonnées;
+		this.coordonnees = coordonnées;
 	}
 	public Adresse getAdresse() {
 		return adresse;
 	}
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
-	}*/
+	}
 	
 	
 	public Integer getId() {
@@ -115,9 +117,9 @@ public class Stagiaire {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.coordonnées = coordonnées;
+		this.coordonnees = coordonnées;
 		this.adresse = adresse;
-	}*/
+	}
 	public Stagiaire() {
 		super();
 	}

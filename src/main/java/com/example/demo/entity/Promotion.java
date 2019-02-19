@@ -5,42 +5,47 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import org.formation.demoBoot.entity.jsonview.JsonViews;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="promotion")
+@SequenceGenerator(name="seqPromotion",sequenceName="seq_promotion",allocationSize=1,initialValue=1)
 public class Promotion {
 	@Id
 	@Column(name = "nom", length = 50)
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
+	@GeneratedValue(generator="seqPromotion",strategy=GenerationType.SEQUENCE)
 	private String nom;
 	@Column(name = "debut")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Date debut;
 	@Column(name = "fin")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Date fin;
 	@OneToMany(mappedBy = "promotion")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Set<Stagiaire> stagiaires;
 	@OneToMany(mappedBy = "promotion")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Set<Module> modules;
 	@ManyToOne
 	@JoinColumn(name = "programme_titre")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Programme programme;
 	@Version
 	private int version;

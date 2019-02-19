@@ -1,123 +1,73 @@
 package com.example.demo.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Version;
-
-import com.example.demo.entity.jsonViews.JsonViews;
-import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.Version;
+import javax.persistence.criteria.CriteriaBuilder.In;
 
 @Entity
-@Table(name="formateur")
-@SequenceGenerator(name="seqFormateur", sequenceName="seq_formateur",allocationSize=1,initialValue=1)
-public class Formateur {
-
+@Table(name="techicien")
+@SequenceGenerator(name="seqTechnicien", sequenceName="seq_technicien",allocationSize=1,initialValue=1)
+public class Technicien {
+	
 	@Id
-	@GeneratedValue(generator="seqFormateur",strategy=GenerationType.SEQUENCE)
-	@Column(name="id")
-	@JsonView(JsonViews.common.class)
+	@GeneratedValue(generator="seqTechnicien",strategy=GenerationType.SEQUENCE)
 	private Integer id;
-	@Column(name="prenom")
-	@JsonView(JsonViews.common.class)
-	private String prenom;
-	@JsonView(JsonViews.common.class)
 	@Column(name="nom")
 	private String nom;
-	@JsonView(JsonViews.common.class)
+	@Column(name="prenom")
+	private String prenom;
 	@Column(name="coordonnees")
 	private String coordonnees;
-	@JsonView(JsonViews.common.class)
 	@Embedded
-	private Adresse	adresse;
-	@ManyToMany(mappedBy="formateurs")
-	private	List<Matiere> matieres;
-	@JsonView(JsonViews.common.class)
-	@OneToMany(mappedBy="formateur")
-	private List<Module> modules;
-	@javax.persistence.Version
+	private Adresse adresse;
+	@Version
 	private Integer version;
-	
-	public Formateur() {
-		super();
-	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
 	public String getNom() {
 		return nom;
 	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	public String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 	public String getCoordonnees() {
 		return coordonnees;
 	}
-
 	public void setCoordonnees(String coordonnees) {
 		this.coordonnees = coordonnees;
 	}
-
 	public Adresse getAdresse() {
 		return adresse;
 	}
-
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-
-	public List<Matiere> getMatieres() {
-		return matieres;
-	}
-
-	public void setMatieres(List<Matiere> matieres) {
-		this.matieres = matieres;
-	}
-
-	public List<Module> getModules() {
-		return modules;
-	}
-
-	public void setModules(List<Module> modules) {
-		this.modules = modules;
-	}
-
 	public Integer getVersion() {
 		return version;
 	}
-
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-
+	public Technicien() {
+		super();
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,7 +76,6 @@ public class Formateur {
 		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -135,7 +84,7 @@ public class Formateur {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Formateur other = (Formateur) obj;
+		Technicien other = (Technicien) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -148,11 +97,7 @@ public class Formateur {
 			return false;
 		return true;
 	}
-
-	
 	
 
-
-
-
+	
 }

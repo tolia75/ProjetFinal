@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.entity.Matiere;
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.example.demo.repository.MatiereRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -31,13 +32,13 @@ public class MatiereRestController {
 	@Autowired
 	private MatiereRepository matiereRepository;
 
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Matiere>> findAllMatiere() {
 		return new ResponseEntity<List<Matiere>>(matiereRepository.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	@GetMapping("/{nomMatiere}")
 	public ResponseEntity<Matiere> findById(@PathVariable(name = "nomMatiere") String nomMatiere) {
 		Optional<Matiere> opt = matiereRepository.findById(nomMatiere);

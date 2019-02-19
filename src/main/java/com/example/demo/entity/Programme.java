@@ -4,28 +4,36 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
-import org.formation.demoBoot.entity.jsonview.JsonViews;
-
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "programme")
+@SequenceGenerator(name="seqProgramme",sequenceName="seq_programme",allocationSize=1,initialValue=1)
 public class Programme {
+
+	@JsonView(JsonViews.common.class)
 	@Id
+	@GeneratedValue(generator="seqProgramme",strategy=GenerationType.SEQUENCE)
+	private Integer id;
 	@Column(name = "titre", length = 50)
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private String titre;
 	@OneToMany(mappedBy = "programme")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Set<Promotion> promotions;
-	@OneToMany(mappedBy = "programme")
-	@JsonView(JsonViews.Common.class)
+	@ManyToMany(mappedBy = "programmes")
+	@JsonView(JsonViews.common.class)
 	private Set<Matiere> matieres;
 	@Version
 	private int version;

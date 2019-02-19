@@ -4,32 +4,47 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
-import org.formation.demoBoot.entity.jsonview.JsonViews;
-
+import com.example.demo.entity.jsonViews.JsonViews;
 import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "matiere")
+@SequenceGenerator(name="seqMatiere",sequenceName="seq_matiere",allocationSize=1,initialValue=1)
 public class Matiere {
 
+	@JsonView(JsonViews.common.class)
 	@Id
+	@GeneratedValue(generator="seqMatiere",strategy=GenerationType.SEQUENCE)
+	private Integer id;
+	
 	@Column(name = "serial", length = 50)
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private String nomMatiere;
-	@OneToMany(mappedBy = "matiere")
-	@JsonView(JsonViews.Common.class)
+	@ManyToMany()
+	@JoinTable(name="programmes_matieres", joinColumns=@JoinColumn(name="matieres", referencedColumnName="id"),
+	inverseJoinColumns=@JoinColumn(name="programmes", referencedColumnName="id"))
+	@JsonView(JsonViews.common.class)
 	private Set<Programme> programmes;
-	@OneToMany(mappedBy = "matiere")
-	@JsonView(JsonViews.Common.class)
+	@ManyToMany
+	@JoinTable(name="formateurs_matieres", joinColumns=@JoinColumn(name="matieres", referencedColumnName="id"),
+	inverseJoinColumns=@JoinColumn(name="formateurs", referencedColumnName="id"))
+	@JsonView(JsonViews.common.class)
 	private Set<Formateur> formateurs;
 	@OneToMany(mappedBy = "matiere")
-	@JsonView(JsonViews.Common.class)
+	@JsonView(JsonViews.common.class)
 	private Set<Module> modules;
 	@Version
 	private int version;

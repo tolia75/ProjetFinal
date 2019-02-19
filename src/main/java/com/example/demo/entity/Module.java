@@ -31,11 +31,11 @@ public class Module {
 	private Integer id;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="Date debut")
+	@Column(name="date_debut")
 	@DateTimeFormat(pattern="yyyy-MM--dd")
 	private Date debut;
 	@Temporal(TemporalType.DATE)
-	@Column(name="Date fin")
+	@Column(name="date_fin")
 	@DateTimeFormat(pattern="yyyy-MM--dd")
 	private Date fin;
 	
