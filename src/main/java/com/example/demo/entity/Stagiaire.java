@@ -75,6 +75,7 @@ public class Stagiaire {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	
 	public String getCoordonnées() {
 		return coordonnées;
 	}
@@ -86,7 +87,7 @@ public class Stagiaire {
 	}
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
-	}
+	}*/
 	
 	
 	public Integer getId() {
@@ -95,25 +96,28 @@ public class Stagiaire {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public Ordinateur getOrdinateur() {
 		return ordinateur;
 	}
 	public void setOrdinateur(Ordinateur ordinateur) {
 		this.ordinateur = ordinateur;
 	}
+	
 	public Integer getVersion() {
 		return version;
 	}
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	
 	public Stagiaire(String nom, String prenom, String coordonnées, Adresse adresse) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.coordonnées = coordonnées;
 		this.adresse = adresse;
-	}
+	}*/
 	public Stagiaire() {
 		super();
 	}
