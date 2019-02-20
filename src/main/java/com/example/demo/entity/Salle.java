@@ -1,6 +1,7 @@
-package com.example.demo.entity;
+	package com.example.demo.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,10 +36,10 @@ public class Salle {
 	private Integer capacite;
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToMany
-	private List<Module> modules;
+	private Set<Module> modules;
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToOne
-	@JoinColumn(name="salle")
+	@JoinColumn(name="video_projecteur")
 	private VideoProjecteur videoProjecteur;
 	@Version
 	private Integer version;
@@ -66,10 +67,10 @@ public class Salle {
 	public void setCapacite(Integer capacite) {
 		this.capacite = capacite;
 	}
-	public List<Module> getModules() {
+	public Set<Module> getModules() {
 		return modules;
 	}
-	public void setModules(List<Module> modules) {
+	public void setModules(Set<Module> modules) {
 		this.modules = modules;
 	}
 	public VideoProjecteur getVideoProjecteur() {

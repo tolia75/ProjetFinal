@@ -78,6 +78,10 @@ public class FormateurRestController {
 	
 	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable(name = "id") Integer id) {
+		Optional<Formateur>formateur = formateurRepository.findById(id);
+		formateur.get().setMatieres(null);
+		formateur.get().setModules(null);
+		formateurRepository.save(formateur.get());
 		formateurRepository.deleteById(id);
 	}
 	

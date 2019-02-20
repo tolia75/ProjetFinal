@@ -2,6 +2,7 @@ package com.example.demo.restController;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -21,20 +22,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.demo.entity.Module;
 import com.example.demo.entity.Salle;
 import com.example.demo.entity.Stagiaire;
 import com.example.demo.entity.jsonViews.JsonViews;
+import com.example.demo.repository.ModuleRepository;
 import com.example.demo.repository.SalleRepository;
 import com.example.demo.repository.StagiaireRepository;
+import com.example.demo.service.SalleService;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/rest/salle")
-public class SalleRestController 
+public class SalleRestController {
 
-	{@Autowired
+		@Autowired
 		private SalleRepository salleRepository;
+		
+		@Autowired
+		private ModuleRepository moduleRepository;
+	
+		@Autowired
+		private SalleService salleService;
 	
 	@JsonView(JsonViews.common.class)
 	@GetMapping(value= {"/",""})
@@ -69,7 +79,23 @@ public class SalleRestController
 	
 	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable(name = "id") Integer id) {
-		salleRepository.deleteById(id);
+		Optional<Salle> salle = salleRepository.findById(id);
+		if (salle.isPresent()) {
+			Salle salleEnBase = salle.get();
+			salleEnBase.setVideoProjecteur(null);
+			salleEnBase.setDisponibilite(false);
+
+			Set<Module>modules = salleEnBase.getModules();
+			for (Module m:modules) {
+				m.setSalle(null);
+				moduleRepository.save(m);
+			}
+			salleRepository.save(salle.get());
+			salleRepository.deleteById(id);
+		}
+		else {
+			
+		}
 	}
 	
 	@PutMapping("/stagiaire")

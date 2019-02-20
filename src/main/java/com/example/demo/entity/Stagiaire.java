@@ -123,6 +123,12 @@ public class Stagiaire {
 			return false;
 		return true;
 	}
+	public Promotion getPromotion() {
+		return promotion;
+	}
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
+	}
 	
 	
 	

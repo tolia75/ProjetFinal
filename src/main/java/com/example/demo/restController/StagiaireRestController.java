@@ -77,6 +77,10 @@ public class StagiaireRestController {
 	
 	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable(name = "id") Integer id) {
+		Optional<Stagiaire>stagiaire = stagiaireRepository.findById(id);
+		stagiaire.get().setOrdinateur(null);
+		stagiaire.get().setPromotion(null);
+		stagiaireRepository.save(stagiaire.get());
 		stagiaireRepository.deleteById(id);
 	}
 	
