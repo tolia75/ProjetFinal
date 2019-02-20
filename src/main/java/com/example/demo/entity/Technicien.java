@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -29,6 +31,10 @@ public class Technicien {
 	private Adresse adresse;
 	@Version
 	private Integer version;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -96,6 +102,13 @@ public class Technicien {
 		} else if (!version.equals(other.version))
 			return false;
 		return true;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 

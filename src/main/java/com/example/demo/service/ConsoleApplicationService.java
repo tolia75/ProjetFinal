@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.StagiaireRepository;
+import com.example.demo.repository.MatiereRepository;
+import com.example.demo.repository.ProgrammeRepository;
 import com.example.demo.repository.UserRepository;
 
 @Service
@@ -23,6 +25,13 @@ public class ConsoleApplicationService implements CommandLineRunner {
 	@Autowired
 	StagiaireRepository statgiaireRepo;
 	
+	
+	@Autowired
+	private MatiereRepository matiereRepo;
+	
+	@Autowired
+	private ProgrammeRepository progRepo;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		 /*
@@ -31,10 +40,13 @@ public class ConsoleApplicationService implements CommandLineRunner {
 			u.setPassword(passwordEncode.encode(u.getPassword()));
 			userRepo.save(u);
 		}*/
-//		System.out.println("----------------------------------------------------------------");
-//		System.out.println(statgiaireRepo.findAll());
-//		System.out.println("lolololollololoooololololololoolooolololo");
+		
+		//matiereRepo.deleteById(1);
+		//progRepo.deleteById(1);
 	}
+
+	
+
 	
 }
 

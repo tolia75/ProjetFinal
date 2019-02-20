@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -51,6 +52,10 @@ public class Formateur {
 	private Set<Module> modules;
 	@javax.persistence.Version
 	private Integer version;
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	public Formateur() {
 		super();
@@ -151,10 +156,12 @@ public class Formateur {
 		return true;
 	}
 
-	
-	
+	public User getUser() {
+		return user;
+	}
 
-
-
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }
