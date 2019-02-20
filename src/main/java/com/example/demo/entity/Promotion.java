@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,10 +35,12 @@ public class Promotion {
 	@Column(name = "nom", length = 50)
 	@JsonView(JsonViews.common.class)
 	private String nom;
+	@Temporal(TemporalType.DATE)
 	@Column(name = "debut")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonView(JsonViews.common.class)
 	private Date debut;
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fin")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonView(JsonViews.common.class)
