@@ -114,7 +114,7 @@ public class ProgrammeRestController {
 	}
 
 	@JsonView(JsonViews.common.class)
-	@PutMapping("/programme")
+	@PutMapping("/update")
 	private Programme update(@Valid @RequestBody Programme programme, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;

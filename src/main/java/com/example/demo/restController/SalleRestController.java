@@ -98,7 +98,7 @@ public class SalleRestController {
 		}
 	}
 	
-	@PutMapping("/stagiaire")
+	@PutMapping("/update")
 	private Salle update(@Valid @RequestBody Salle salle, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;

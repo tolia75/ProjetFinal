@@ -169,7 +169,7 @@ public class MatiereRestController {
 	
 
 	@JsonView(JsonViews.common.class)
-	@PutMapping("/matiere")
+	@PutMapping("/update")
 	private Matiere update(@Valid @RequestBody Matiere matiere, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;

@@ -92,7 +92,7 @@ public class StagiaireRestController {
 
 	}
 	
-	@PutMapping("/stagiaire")
+	@PutMapping("/update")
 	private Stagiaire update(@Valid @RequestBody Stagiaire stagiaire, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;

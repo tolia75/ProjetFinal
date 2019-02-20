@@ -94,7 +94,7 @@ public class PromotionRestController {
 	}
 	
 	@JsonView(JsonViews.common.class)
-	@PutMapping("/promotion")
+	@PutMapping("/update")
 	private Promotion update(@Valid @RequestBody Promotion promotion, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;

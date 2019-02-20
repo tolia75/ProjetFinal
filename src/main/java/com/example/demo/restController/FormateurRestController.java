@@ -115,7 +115,7 @@ public class FormateurRestController {
 
 	}
 	
-	@PutMapping("/stagiaire")
+	@PutMapping("/update")
 	private Formateur update(@Valid @RequestBody Formateur formateur, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;
