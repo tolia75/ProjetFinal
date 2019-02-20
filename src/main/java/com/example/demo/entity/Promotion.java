@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @SequenceGenerator(name="seqPromotion",sequenceName="seq_promotion",allocationSize=1,initialValue=1)
 public class Promotion {
 	@Id
+	@Column(name = "id", length = 50)
 	@JsonView(JsonViews.common.class)
 	@GeneratedValue(generator="seqPromotion",strategy=GenerationType.SEQUENCE)
 	private Integer id;
@@ -41,12 +42,14 @@ public class Promotion {
 	@JsonView(JsonViews.common.class)
 	private Date fin;
 	@OneToMany(mappedBy = "promotion")
-	private List<Stagiaire> stagiaires;
+	@JsonView(JsonViews.PromotionWithStagiaire.class)
+	private Set<Stagiaire> stagiaires;
 	@OneToMany(mappedBy = "promotion")
-	private List<Module> modules;
+	@JsonView(JsonViews.PromotionWithModule.class)
+	private Set<Module> modules;
 	@ManyToOne
-	@JoinColumn(name = "titre")
-	@JsonView(JsonViews.common.class)
+	@JoinColumn(name = "programme_titre")
+	@JsonView(JsonViews.PromotionWithProgramme.class)
 	private Programme programme;
 	@Version
 	private int version;
@@ -111,11 +114,18 @@ public class Promotion {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -127,14 +137,13 @@ public class Promotion {
 		if (getClass() != obj.getClass())
 			return false;
 		Promotion other = (Promotion) obj;
-		if (nom == null) {
-			if (other.nom != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!nom.equals(other.nom))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
 	
 	
 	

@@ -3,6 +3,8 @@ package com.example.demo.restController;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,9 +43,9 @@ public class PromotionRestController {
 	}
 	
 	@JsonView(JsonViews.common.class)
-	@GetMapping("/{nom}")
-	public ResponseEntity<Promotion> findById(@PathVariable(name = "nom") String nom) {
-		Optional<Promotion> opt = promotionRepository.findById(nom);
+	@GetMapping("/{id}")
+	public ResponseEntity<Promotion> findById(@PathVariable(name = "id") Integer id) {
+		Optional<Promotion> opt = promotionRepository.findById(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Promotion>(opt.get(), HttpStatus.OK);
 		} else {
@@ -49,31 +54,52 @@ public class PromotionRestController {
 
 	}
 	
-
-
-	private ResponseEntity<Void> insertPromotion(Promotion promotion, BindingResult br, UriComponentsBuilder uCB) {
+	@JsonView(JsonViews.PromotionWithProgramme.class)
+	@GetMapping("/programme")
+	public List<Promotion> findAllPromotionWithProgramme() {
+		return promotionRepository.findAll();
+	}
+	
+	@JsonView(JsonViews.PromotionWithModule.class)
+	@GetMapping("/module")
+	public List<Promotion> findAllPromotionWithModule() {
+		return promotionRepository.findAll();
+	}
+	
+	@JsonView(JsonViews.PromotionWithStagiaire.class)
+	@GetMapping("/stagiaire")
+	public List<Promotion> findAllPromotionWithStagiaire() {
+		return promotionRepository.findAll();
+	}
+	
+	
+	@JsonView(JsonViews.common.class)
+	@PostMapping("/")
+	private ResponseEntity<Void> insertPromotion(@Valid @RequestBody Promotion promotion, BindingResult br, UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 			promotionRepository.save(promotion);
 			HttpHeaders header = new HttpHeaders();
-			header.setLocation(uCB.path("/rest/promotion/{nom}").buildAndExpand(promotion.getNom()).toUri());
+			header.setLocation(uCB.path("/rest/promotion/{id}").buildAndExpand(promotion.getId()).toUri());
 			return new ResponseEntity<>(header, HttpStatus.CREATED);
 		}
 
 	}
-
-	@DeleteMapping("/{nom}")
-	public void delete(@PathVariable(name = "nom") String nom) {
-		promotionRepository.deleteById(nom);
+	
+	@JsonView(JsonViews.common.class)
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable(name = "id") Integer id) {
+		promotionRepository.deleteById(id);
 	}
-
-
-	private Promotion update(Promotion promotion, BindingResult br) {
+	
+	@JsonView(JsonViews.common.class)
+	@PutMapping("/promotion")
+	private Promotion update(@Valid @RequestBody Promotion promotion, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;
 		} else {
-			Optional<Promotion> opt = promotionRepository.findById(promotion.getNom());
+			Optional<Promotion> opt = promotionRepository.findById(promotion.getId());
 			if (opt.isPresent()) {
 				Promotion promotionEnBase = opt.get();
 				promotion.setVersion(promotionEnBase.getVersion());
