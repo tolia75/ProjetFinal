@@ -55,14 +55,14 @@ public class FormateurRestController {
 		return new ResponseEntity<List<Formateur>>(formateurRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
+	@JsonView(JsonViews.FormateurWithOrdinateur.class)
 	@GetMapping("/")
 	public List<Formateur>findAllWith(){
 		List<Formateur> formateurs = new ArrayList();
 		return formateurs = formateurRepository.findAll();
 	}
 	
-	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
+	@JsonView(JsonViews.FormateurWithOrdinateur.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Formateur> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Formateur> opt = formateurRepository.findById(id);

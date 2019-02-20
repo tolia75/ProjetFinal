@@ -42,14 +42,14 @@ public class Promotion {
 	@JsonView(JsonViews.common.class)
 	private Date fin;
 	@OneToMany(mappedBy = "promotion")
-	@JsonView(JsonViews.PromotionWithStagiaire.class)
+	@JsonView(JsonViews.PromotionWithAll.class)
 	private Set<Stagiaire> stagiaires;
 	@OneToMany(mappedBy = "promotion")
-	@JsonView(JsonViews.PromotionWithModule.class)
+	@JsonView(JsonViews.PromotionWithAll.class)
 	private Set<Module> modules;
 	@ManyToOne
 	@JoinColumn(name = "programme_titre")
-	@JsonView(JsonViews.PromotionWithProgramme.class)
+	@JsonView(JsonViews.PromotionWithAll.class)
 	private Programme programme;
 	@Version
 	private int version;

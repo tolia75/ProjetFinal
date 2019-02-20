@@ -36,13 +36,13 @@ public class PromotionRestController {
 	@Autowired
 	private PromotionRepository promotionRepository;
 	
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.PromotionWithAll.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Promotion>> findAllPromotion() {
 		return new ResponseEntity<List<Promotion>>(promotionRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.PromotionWithAll.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Promotion> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Promotion> opt = promotionRepository.findById(id);

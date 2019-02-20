@@ -31,10 +31,10 @@ public class Programme {
 	@JsonView(JsonViews.common.class)
 	private String titre;
 	@OneToMany(mappedBy = "programme")
-	@JsonView(JsonViews.ProgrammeWithPromotion.class)
+	@JsonView(JsonViews.ProgrammeWithAll.class)
 	private Set<Promotion> promotions;
 	@ManyToMany(mappedBy = "programmes")
-	@JsonView(JsonViews.ProgrammeWithMatiere.class)
+	@JsonView(JsonViews.ProgrammeWithAll.class)
 	private Set<Matiere> matieres;
 	@Version
 	private int version;

@@ -38,15 +38,15 @@ public class Matiere {
 	@ManyToMany()
 	@JoinTable(name="programmes_matieres", joinColumns=@JoinColumn(name="matieres", referencedColumnName="id"),
 	inverseJoinColumns=@JoinColumn(name="programmes", referencedColumnName="id"))
-	@JsonView(JsonViews.MatiereWithProgramme.class)
+	@JsonView(JsonViews.MatiereWithAll.class)
 	private Set<Programme> programmes;
 	@ManyToMany
 	@JoinTable(name="formateurs_matieres", joinColumns=@JoinColumn(name="matieres", referencedColumnName="id"),
 	inverseJoinColumns=@JoinColumn(name="formateurs", referencedColumnName="id"))
-	@JsonView(JsonViews.MatiereWithFormateur.class)
+	@JsonView(JsonViews.MatiereWithAll.class)
 	private Set<Formateur> formateurs;
 	@OneToMany(mappedBy = "matiere")
-	@JsonView(JsonViews.MatiereWithModule.class)
+	@JsonView(JsonViews.MatiereWithAll.class)
 	private Set<Module> modules;
 	@Version
 	private int version;

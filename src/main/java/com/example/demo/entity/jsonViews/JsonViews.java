@@ -9,6 +9,22 @@ public class JsonViews {
 	public static class StagiaireWithOrdinateur extends common{
 		
 	}
+	public static class FormateurWithOrdinateur extends common{
+		
+	}
+public static class MatiereWithAll extends common{
+		
+	}
+public static class ModuleWithAll extends common{
+	
+}
+public static class ProgrammeWithAll extends common{
+	
+}
+public static class PromotionWithAll extends common{
+	
+}
+
 
 	
 	public static class PromotionWithProgramme extends common {

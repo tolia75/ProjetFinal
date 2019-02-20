@@ -34,13 +34,13 @@ public class ModuleRestController {
 	@Autowired
 	ModuleRepository moduleRepo;
 	
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.ModuleWithAll.class)
 	@GetMapping(value= {"","/","/list"})
 	public ResponseEntity<List<Module>> findAllModule(){
 		return new ResponseEntity<List<Module>>(moduleRepo.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.ModuleWithAll.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Module> findById(@PathVariable(name="id") Integer id){
 		Optional<Module> opt = moduleRepo.findById(id);

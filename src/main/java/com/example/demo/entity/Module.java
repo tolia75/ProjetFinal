@@ -42,6 +42,7 @@ public class Module {
 	@Column(name="date_fin")
 	@DateTimeFormat(pattern="yyyy-MM--dd")
 	private Date fin;
+	@JsonView(JsonViews.ModuleWithAll.class)
 	@ManyToOne
 	@JoinColumn(name="formateur_id")
 	private Formateur formateur;
@@ -50,9 +51,11 @@ public class Module {
 	private Salle salle;
 	@Enumerated(EnumType.STRING)
 	private Niveau niveau;
+	@JsonView(JsonViews.ModuleWithAll.class)
 	@ManyToOne
 	@JoinColumn(name="matiere_id")
 	private Matiere matiere;
+	@JsonView(JsonViews.ModuleWithAll.class)
 	@ManyToOne
 	@JoinColumn(name="promotion_id")
 	private Promotion promotion;

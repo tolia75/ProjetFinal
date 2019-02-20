@@ -44,13 +44,13 @@ public class ProgrammeRestController {
 	@Autowired
 	private MatiereRepository matiereRepository;
 	
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.ProgrammeWithAll.class)
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<Programme>> findAllProgramme() {
 		return new ResponseEntity<List<Programme>>(programmeRepository.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.ProgrammeWithAll.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Programme> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Programme> opt = programmeRepository.findById(id);

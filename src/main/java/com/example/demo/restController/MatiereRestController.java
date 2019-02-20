@@ -57,7 +57,7 @@ public class MatiereRestController {
 		return new ResponseEntity<List<Matiere>>(matiereRepository.findAll(), HttpStatus.OK);
 	}
 
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.MatiereWithAll.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Matiere> findById(@PathVariable(name = "id") Integer id) {
 		Optional<Matiere> opt = matiereRepository.findById(id);
@@ -67,6 +67,13 @@ public class MatiereRestController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
+	}
+	
+	
+	@JsonView(JsonViews.MatiereWithAll.class)
+	@GetMapping("/all")
+	public List<Matiere> findAllMatiereWithAll() {
+		return matiereRepository.findAll();
 	}
 	
 	@JsonView(JsonViews.MatiereWithProgramme.class)
