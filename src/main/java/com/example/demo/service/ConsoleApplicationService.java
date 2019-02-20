@@ -34,12 +34,12 @@ public class ConsoleApplicationService implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		 /*
-		List<User> users = userRepo.findAll();
-		for(User u : users) {
-			u.setPassword(passwordEncode.encode(u.getPassword()));
-			userRepo.save(u);
-		}*/
+		
+//		List<User> users = userRepo.findAll();
+//		for(User u : users) {
+//			u.setPassword(passwordEncode.encode(u.getPassword()));
+//			userRepo.save(u);
+//		}
 		
 		//matiereRepo.deleteById(1);
 		//progRepo.deleteById(1);

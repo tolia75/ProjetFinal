@@ -36,7 +36,7 @@ public class Stagiaire {
 	@JsonView(JsonViews.common.class)
 	private String coordonnee;
 	@Embedded
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	private Adresse adresse;
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@ManyToOne
