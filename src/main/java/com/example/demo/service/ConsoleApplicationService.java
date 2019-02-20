@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.User;
+import com.example.demo.repository.MatiereRepository;
+import com.example.demo.repository.ProgrammeRepository;
 import com.example.demo.repository.UserRepository;
 
 @Service
@@ -19,6 +21,12 @@ public class ConsoleApplicationService implements CommandLineRunner {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private MatiereRepository matiereRepo;
+	
+	@Autowired
+	private ProgrammeRepository progRepo;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		/*// TODO Auto-generated method stub
@@ -27,6 +35,9 @@ public class ConsoleApplicationService implements CommandLineRunner {
 			u.setPassword(passwordEncode.encode(u.getPassword()));
 			userRepo.save(u);
 		}*/
+		
+		//matiereRepo.deleteById(1);
+		progRepo.deleteById(1);
 	}
 
 	
