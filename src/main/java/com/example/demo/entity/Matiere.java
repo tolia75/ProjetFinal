@@ -27,24 +27,24 @@ public class Matiere {
 
 	@JsonView(JsonViews.common.class)
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(generator="seqMatiere",strategy=GenerationType.SEQUENCE)
 	private Integer id;
-	
-	@Column(name = "serial", length = 50)
+	@Column(name = "nom_matiere", length = 50)
 	@JsonView(JsonViews.common.class)
 	private String nomMatiere;
 	@ManyToMany()
 	@JoinTable(name="programmes_matieres", joinColumns=@JoinColumn(name="matieres", referencedColumnName="id"),
 	inverseJoinColumns=@JoinColumn(name="programmes", referencedColumnName="id"))
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.MatiereWithProgramme.class)
 	private Set<Programme> programmes;
 	@ManyToMany
 	@JoinTable(name="formateurs_matieres", joinColumns=@JoinColumn(name="matieres", referencedColumnName="id"),
 	inverseJoinColumns=@JoinColumn(name="formateurs", referencedColumnName="id"))
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.MatiereWithFormateur.class)
 	private Set<Formateur> formateurs;
 	@OneToMany(mappedBy = "matiere")
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.MatiereWithModule.class)
 	private Set<Module> modules;
 	@Version
 	private int version;
@@ -85,11 +85,19 @@ public class Matiere {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nomMatiere == null) ? 0 : nomMatiere.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -101,13 +109,14 @@ public class Matiere {
 		if (getClass() != obj.getClass())
 			return false;
 		Matiere other = (Matiere) obj;
-		if (nomMatiere == null) {
-			if (other.nomMatiere != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!nomMatiere.equals(other.nomMatiere))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	
 	
 	
 

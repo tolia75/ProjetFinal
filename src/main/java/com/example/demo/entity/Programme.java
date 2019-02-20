@@ -24,16 +24,17 @@ public class Programme {
 
 	@JsonView(JsonViews.common.class)
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(generator="seqProgramme",strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	@Column(name = "titre", length = 50)
 	@JsonView(JsonViews.common.class)
 	private String titre;
 	@OneToMany(mappedBy = "programme")
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.ProgrammeWithPromotion.class)
 	private Set<Promotion> promotions;
 	@ManyToMany(mappedBy = "programmes")
-	@JsonView(JsonViews.common.class)
+	@JsonView(JsonViews.ProgrammeWithMatiere.class)
 	private Set<Matiere> matieres;
 	@Version
 	private int version;
@@ -70,11 +71,19 @@ public class Programme {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((titre == null) ? 0 : titre.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -86,10 +95,10 @@ public class Programme {
 		if (getClass() != obj.getClass())
 			return false;
 		Programme other = (Programme) obj;
-		if (titre == null) {
-			if (other.titre != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!titre.equals(other.titre))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

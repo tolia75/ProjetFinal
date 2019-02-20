@@ -24,7 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous();
 	
-		http.csrf();
+		http.csrf().disable();
 		
 		http.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic();
 		
