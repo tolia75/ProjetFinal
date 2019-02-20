@@ -53,8 +53,9 @@ public class Stagiaire {
 	@JoinColumn(name="user_id")
 	private User user;
 
-	public String getCoordonnees() {
-		return coordonnees;
+	public String getCoordonnee() {
+		return coordonnee;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -74,9 +75,7 @@ public class Stagiaire {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getCoordonnee() {
-		return coordonnee;
-	}
+	
 	public void setCoordonnee(String coordonnee) {
 		this.coordonnee = coordonnee;
 	}

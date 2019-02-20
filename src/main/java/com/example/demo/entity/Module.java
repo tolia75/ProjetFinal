@@ -42,7 +42,6 @@ public class Module {
 	@Column(name="date_fin")
 	@DateTimeFormat(pattern="yyyy-MM--dd")
 	private Date fin;
-	@JsonView(JsonViews.commonBis.class)
 	@ManyToOne
 	@JoinColumn(name="formateur_id")
 	private Formateur formateur;

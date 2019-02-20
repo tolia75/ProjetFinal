@@ -84,22 +84,17 @@ public class Promotion {
 		this.nom = nom;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public List<Stagiaire> getStagiaires() {
+	
+	public Set<Stagiaire> getStagiaires() {
 		return stagiaires;
 	}
-	public void setStagiaires(List<Stagiaire> stagiaires) {
+	public void setStagiaires(Set<Stagiaire> stagiaires) {
 		this.stagiaires = stagiaires;
 	}
-	public List<Module> getModules() {
+	public Set<Module> getModules() {
 		return modules;
 	}
-	public void setModules(List<Module> modules) {
+	public void setModules(Set<Module> modules) {
 		this.modules = modules;
 	}
 	public Programme getProgramme() {
