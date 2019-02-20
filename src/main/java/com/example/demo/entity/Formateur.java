@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -44,10 +45,10 @@ public class Formateur {
 	private Adresse	adresse;
 	@ManyToMany(mappedBy="formateurs")
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
-	private	List<Matiere> matieres;
+	private	Set<Matiere> matieres;
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToMany(mappedBy="formateur")
-	private List<Module> modules;
+	private Set<Module> modules;
 	@javax.persistence.Version
 	private Integer version;
 	
@@ -95,19 +96,19 @@ public class Formateur {
 		this.adresse = adresse;
 	}
 
-	public List<Matiere> getMatieres() {
+	public Set<Matiere> getMatieres() {
 		return matieres;
 	}
 
-	public void setMatieres(List<Matiere> matieres) {
+	public void setMatieres(Set<Matiere> matieres) {
 		this.matieres = matieres;
 	}
 
-	public List<Module> getModules() {
+	public Set<Module> getModules() {
 		return modules;
 	}
 
-	public void setModules(List<Module> modules) {
+	public void setModules(Set<Module> modules) {
 		this.modules = modules;
 	}
 

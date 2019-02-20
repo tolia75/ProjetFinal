@@ -35,7 +35,7 @@ public class Salle {
 	@Column(name="capacite")
 	private Integer capacite;
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
-	@OneToMany
+	@OneToMany(mappedBy="salle")
 	private Set<Module> modules;
 	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
 	@OneToOne

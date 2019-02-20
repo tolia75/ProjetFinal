@@ -90,7 +90,7 @@ public class SalleRestController {
 				m.setSalle(null);
 				moduleRepository.save(m);
 			}
-			salleRepository.save(salle.get());
+			salleRepository.save(salleEnBase);
 			salleRepository.deleteById(id);
 		}
 		else {

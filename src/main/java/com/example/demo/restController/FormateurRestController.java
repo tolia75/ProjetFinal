@@ -3,6 +3,7 @@ package com.example.demo.restController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -23,9 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.entity.Formateur;
+import com.example.demo.entity.Matiere;
+import com.example.demo.entity.Module;
 import com.example.demo.entity.Stagiaire;
 import com.example.demo.entity.jsonViews.JsonViews;
 import com.example.demo.repository.FormateurRepository;
+import com.example.demo.repository.MatiereRepository;
+import com.example.demo.repository.ModuleRepository;
 import com.example.demo.repository.StagiaireRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -36,6 +41,12 @@ public class FormateurRestController {
 
 	@Autowired
 	private FormateurRepository formateurRepository;
+	
+	@Autowired
+	private ModuleRepository moduleRepository;
+	
+	@Autowired
+	private MatiereRepository matiereRepository;
 	
 
 	@JsonView(JsonViews.common.class)
@@ -79,10 +90,29 @@ public class FormateurRestController {
 	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable(name = "id") Integer id) {
 		Optional<Formateur>formateur = formateurRepository.findById(id);
-		formateur.get().setMatieres(null);
-		formateur.get().setModules(null);
-		formateurRepository.save(formateur.get());
-		formateurRepository.deleteById(id);
+		if (formateur.isPresent()) {
+			Formateur formateurEnBase=formateur.get();
+			Set<Matiere> matieres = formateurEnBase.getMatieres();
+			Set<Module> modules = formateurEnBase.getModules();
+			for (Matiere matiere : matieres) {
+				for (Formateur formateur2: matiere.getFormateurs()) {
+					if (formateur2.getId()==formateurEnBase.getId()) {
+						matiere.getFormateurs().remove(formateurEnBase);
+						matiereRepository.save(matiere);
+					}
+					matiereRepository.save(matiere);
+				}	
+			}
+			for (Module module : modules) {
+				module.setFormateur(null);
+				moduleRepository.save(module);
+			}
+			formateurRepository.save(formateurEnBase);
+			formateurRepository.deleteById(id);
+		}else {
+			
+		}
+
 	}
 	
 	@PutMapping("/stagiaire")
