@@ -9,6 +9,6 @@ import com.example.demo.entity.Matiere;
 
 
 @CrossOrigin(origins="*",methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public interface MatiereRepository extends JpaRepository<Matiere, Integer> {
+public interface MatiereRepository extends JpaRepository<Matiere, String> {
 
 }

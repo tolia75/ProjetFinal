@@ -37,7 +37,7 @@ public class MatiereRestController {
 	public ResponseEntity<List<Matiere>> findAllMatiere() {
 		return new ResponseEntity<List<Matiere>>(matiereRepository.findAll(), HttpStatus.OK);
 	}
-/*
+
 	@JsonView(JsonViews.common.class)
 	@GetMapping("/{nomMatiere}")
 	public ResponseEntity<Matiere> findById(@PathVariable(name = "nomMatiere") String nomMatiere) {
@@ -48,7 +48,7 @@ public class MatiereRestController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
-	}*/
+	}
 
 	
 
@@ -63,13 +63,13 @@ public class MatiereRestController {
 		}
 
 	}
-/*
+
 	@DeleteMapping("/{nomMatiere}")
 	public void delete(@PathVariable(name = "nomMatiere") String nomMatiere) {
 		matiereRepository.deleteById(nomMatiere);
-	}*/
+	}
 
-/*
+
 	private Matiere update(Matiere matiere, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;
@@ -84,7 +84,7 @@ public class MatiereRestController {
 			}
 
 		}
-	}*/
+	}
 }
 
 

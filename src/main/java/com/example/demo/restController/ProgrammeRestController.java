@@ -35,7 +35,7 @@ public class ProgrammeRestController {
 	public ResponseEntity<List<Programme>> findAllProgramme() {
 		return new ResponseEntity<List<Programme>>(programmeRepository.findAll(), HttpStatus.OK);
 	}
-/*
+
 	@JsonView(JsonViews.common.class)
 	@GetMapping("/{titre}")
 	public ResponseEntity<Programme> findById(@PathVariable(name = "titre") String titre) {
@@ -46,7 +46,7 @@ public class ProgrammeRestController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
-	}*/
+	}
 
 	
 
@@ -61,13 +61,13 @@ public class ProgrammeRestController {
 		}
 
 	}
-/*
+
 	@DeleteMapping("/{titre}")
 	public void delete(@PathVariable(name = "titre") String titre) {
 		programmeRepository.deleteById(titre);
-	}*/
+	}
 
-/*
+
 	private Programme update(Programme programme, BindingResult br) {
 		if (br.hasErrors()) {
 			return null;
@@ -82,7 +82,7 @@ public class ProgrammeRestController {
 			}
 
 		}
-	}*/
+	}
 }
 
 

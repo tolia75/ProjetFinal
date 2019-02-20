@@ -51,6 +51,9 @@ public class Stagiaire {
 	@javax.persistence.Version
 	private Integer version;
 
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 
 	public String getCoordonnees() {
 		return coordonnees;
@@ -152,6 +155,11 @@ public class Stagiaire {
 			return false;
 		return true;
 	}
-	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }

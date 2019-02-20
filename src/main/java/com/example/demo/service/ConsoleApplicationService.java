@@ -37,7 +37,7 @@ public class ConsoleApplicationService implements CommandLineRunner {
 		}*/
 		
 		//matiereRepo.deleteById(1);
-		progRepo.deleteById(1);
+		//progRepo.deleteById(1);
 	}
 
 	

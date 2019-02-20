@@ -11,15 +11,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.persistence.criteria.CriteriaBuilder.In;
 
 @Entity
-@Table(name="techicien")
-@SequenceGenerator(name="seqTechnicien", sequenceName="seq_technicien",allocationSize=1,initialValue=1)
-public class Technicien {
+@Table(name="gestionnaire")
+@SequenceGenerator(name="seqGestionnaire", sequenceName="seq_gestionnaire",allocationSize=1,initialValue=1)
+public class Gestionnaire {
 	
 	@Id
-	@GeneratedValue(generator="seqTechnicien",strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(generator="seqGestionnaire",strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	@Column(name="nom")
 	private String nom;
@@ -34,6 +33,12 @@ public class Technicien {
 	@OneToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	
+	
+	public Gestionnaire() {
+		super();
+	}
 	
 	public Integer getId() {
 		return id;
@@ -71,17 +76,21 @@ public class Technicien {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-	public Technicien() {
-		super();
+	public User getUser() {
+		return user;
 	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -90,27 +99,15 @@ public class Technicien {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Technicien other = (Technicien) obj;
+		Gestionnaire other = (Gestionnaire) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (version == null) {
-			if (other.version != null)
-				return false;
-		} else if (!version.equals(other.version))
-			return false;
 		return true;
 	}
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
 
-	
 }
