@@ -42,7 +42,7 @@ public class Stagiaire {
 	@ManyToOne
 	@JoinColumn(name="promotion")
 	private Promotion promotion;
-	@JsonView(JsonViews.StagiaireWithOrdinateur.class)
+	@JsonView(JsonViews.common.class)
 	@OneToOne
 	@JoinColumn(name="ordinateur")
 	private Ordinateur ordinateur;
