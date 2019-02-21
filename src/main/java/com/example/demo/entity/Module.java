@@ -35,17 +35,18 @@ public class Module {
 	@JsonView(JsonViews.common.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_debut")
-	@DateTimeFormat(pattern="yyyy-MM--dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date debut;
 	@JsonView(JsonViews.common.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_fin")
-	@DateTimeFormat(pattern="yyyy-MM--dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fin;
 	@JsonView(JsonViews.ModuleWithAll.class)
 	@ManyToOne
 	@JoinColumn(name="formateur_id")
 	private Formateur formateur;
+	@JsonView(JsonViews.ModuleWithAll.class)
 	@ManyToOne
 	@JoinColumn(name="salle_id")
 	private Salle salle;

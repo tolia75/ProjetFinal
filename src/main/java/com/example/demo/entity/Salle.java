@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @SequenceGenerator(name="seqSalle", sequenceName="seq_salle",allocationSize=1,initialValue=1)
 public class Salle {
 	@Id
+	@JsonView(JsonViews.common.class)
 	@GeneratedValue(generator="seqSalle", strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	@JsonView(JsonViews.common.class)
